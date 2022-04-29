@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { addTodos } from '../redux/action'
+import { addTodos, getTodos } from '../redux/action'
 
 export const Todo = () => {
 const [value,setValue]=useState("")
@@ -8,7 +8,15 @@ const handleChange=(e)=>{
   setValue(e.target.value)
 }
 const dispatch=useDispatch()
-
+const fetchTodos =()=>{
+  fetch("http://localhost:8000/posts")
+      .then((response) => {
+        return response.json();
+      })
+      .then((res) => {
+        dispatch(getTodos(res));
+      });
+}
 const handleSubmit = () => {
 let _data=dispatch(addTodos(value))
 // console.log(_data.payload.value)
@@ -23,7 +31,7 @@ let _data=dispatch(addTodos(value))
       return response.json();
     })
     .then((forJson) => {
-      console.log("forJson", forJson);
+      fetchTodos()
     })
     .catch((err) => {
       console.log(err);

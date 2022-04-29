@@ -1,18 +1,20 @@
-import { ADD_TODOS,REMOVE_TODOS } from "./actionType"; 
-import {v4 as uuid} from "uuid"
+import { ADD_TODOS,GET_TODOS, TOGGLE_TODOS} from "./actionType"; 
+
 export const addTodos = (value) => {
 	return {
 		type: ADD_TODOS,
-	    payload:{
-            id:uuid(),
-            value,
-        },
+	    payload:value
 	};
 };
-export const removeTodos = (payload) => {
+export const getTodos = (value) => {
 	return {
-		type: REMOVE_TODOS,
-		payload
-	};
+		type: GET_TODOS,
+		payload:value
 }
-
+}
+export const toggleAction = (payload) => {
+	return {
+		type: TOGGLE_TODOS,
+		payload,
+	};
+};

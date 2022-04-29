@@ -1,4 +1,4 @@
-import { ADD_TODOS, REMOVE_TODOS } from "./actionType";
+import { ADD_TODOS, GET_TODOS,TOGGLE_TODOS} from "./actionType";
 const initState = {
     todos: []
 };
@@ -10,11 +10,19 @@ export const reducer = (state = initState, { type, payload }) => {
                ...state,
                todos : [...state.todos,payload]
              };
-             case REMOVE_TODOS:
+             case GET_TODOS:
              return {
                ...state,
-               todos: [...state.todos.filter((e) => e.id !== payload)],
+               todos : payload
              };
+             case TOGGLE_TODOS:
+              const toogle = (!payload.toogle)
+              const index = state.todo.findIndex((elem) => elem.id === payload.id);
+              state.todos[index].status = toogle;
+              return {
+                ...state,
+                todos: [...state.todos],
+              };
              default:
                  return state
             }   
